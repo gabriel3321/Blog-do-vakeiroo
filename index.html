@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog do Vakeiroo</title>
-    <link rel="stylesheet" href="style.css"> <!-- Seu arquivo de estilo -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Blog do Vakeiroo</h1>
-    <p>Bem-vindo ao blog do Vakeiroo!</p>
+    <h1>Bem-vindo ao Blog do Vakeiroo</h1>
 
-    <!-- Container de Login -->
+    <!-- Container de Login (opcional) -->
     <div id="login-container">
-        <button id="login-btn">Login</button>
+        <button id="login-btn">Login (Opcional)</button>
     </div>
 
-    <!-- Formulário de Login -->
+    <!-- Formulário de Login (exibido somente ao clicar em Login) -->
     <div id="login-form" class="panel">
         <input type="text" id="username" placeholder="Usuário">
         <input type="password" id="password" placeholder="Senha">
         <button id="login-submit">Entrar</button>
     </div>
 
-    <!-- Painel Admin -->
+    <!-- Conteúdo do Blog -->
+    <div id="content">
+        <p>Este é o blog do Vakeiroo! Aqui você pode encontrar todas as atualizações e novidades do streamer.</p>
+        <!-- Adicione conteúdo adicional do blog aqui -->
+    </div>
+
+    <!-- Painel Admin (apenas acessível após login) -->
     <div id="admin-panel" class="panel">
         <h2>Painel de Administração</h2>
         <button onclick="showPostForm()">Criar Postagem</button>
