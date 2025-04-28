@@ -4,98 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog do Vakeiroo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Bem-vindo ao Blog do Vakeiroo</h1>
+    <header>
+        <h1>Blog do Vakeiroo</h1>
+        <div id="live-status">Verificando status...</div>
+        <button id="login-btn">Login Admin</button>
+    </header>
 
-    <!-- Container de Login (opcional) -->
-    <div id="login-container">
-        <button id="login-btn">Login (Opcional)</button>
-    </div>
+    <main id="posts"></main>
 
-    <!-- Formulário de Login (exibido somente ao clicar em Login) -->
-    <div id="login-form" class="panel">
-        <input type="text" id="username" placeholder="Usuário">
-        <input type="password" id="password" placeholder="Senha">
-        <button id="login-submit">Entrar</button>
-    </div>
-
-    <!-- Conteúdo do Blog -->
-    <div id="content">
-        <p>Este é o blog do Vakeiroo! Aqui você pode encontrar todas as atualizações e novidades do streamer.</p>
-        <!-- Adicione conteúdo adicional do blog aqui -->
-    </div>
-
-    <!-- Painel Admin (apenas acessível após login) -->
-    <div id="admin-panel" class="panel">
+    <section id="admin-panel" style="display:none;">
         <h2>Painel de Administração</h2>
-        <button onclick="showPostForm()">Criar Postagem</button>
-        <button onclick="logout()">Logout</button>
-
-        <!-- Formulário de Criação de Post -->
-        <div id="post-form" style="display:none;">
-            <textarea id="post-content" placeholder="Digite seu post aqui..."></textarea>
-            <button id="post-submit">Publicar</button>
-        </div>
-    </div>
+        <input type="text" id="post-title" placeholder="Título da Postagem">
+        <textarea id="post-content" placeholder="Conteúdo da Postagem"></textarea>
+        <input type="file" id="post-image">
+        <button id="create-post-btn">Criar Postagem</button>
+        <div id="admin-posts"></div>
+    </section>
 
     <script src="script.js"></script>
-    <script src="protecao.js"></script>
-    <script>
-        // Login simples
-        const loginBtn = document.getElementById("login-btn");
-        const loginForm = document.getElementById("login-form");
-        const loginSubmit = document.getElementById("login-submit");
-        const usernameInput = document.getElementById("username");
-        const passwordInput = document.getElementById("password");
-        const adminPanel = document.getElementById("admin-panel");
-
-        // Dados de login (mude de acordo com os seus requisitos)
-        const users = [
-            { username: "Vakeiro", password: "melhorstreamerdomundo" },
-            { username: "Gabbz", password: "230112" }
-        ];
-
-        loginBtn.addEventListener("click", () => {
-            loginForm.classList.add("active");
-        });
-
-        loginSubmit.addEventListener("click", () => {
-            const username = usernameInput.value;
-            const password = passwordInput.value;
-
-            const user = users.find(u => u.username === username && u.password === password);
-            if (user) {
-                loginForm.classList.remove("active");
-                adminPanel.classList.add("active");
-            } else {
-                alert("Login falhou! Verifique suas credenciais.");
-            }
-        });
-
-        function logout() {
-            adminPanel.classList.remove("active");
-            loginForm.classList.add("active");
-        }
-
-        function showPostForm() {
-            const postForm = document.getElementById("post-form");
-            postForm.style.display = 'block';
-        }
-
-        // Service Worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then((registration) => {
-                        console.log('Service Worker registrado com sucesso:', registration);
-                    })
-                    .catch((error) => {
-                        console.log('Falha ao registrar o Service Worker:', error);
-                    });
-            });
-        }
-    </script>
 </body>
 </html>
