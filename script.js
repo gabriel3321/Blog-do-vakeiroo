@@ -4,6 +4,9 @@ const adminUsers = {
     "Gabbz": "230112"
 };
 
+// Array para armazenar posts
+let posts = [];
+
 // Login
 document.getElementById('login-btn').addEventListener('click', () => {
     let username = prompt("Digite seu usuário:");
@@ -12,6 +15,7 @@ document.getElementById('login-btn').addEventListener('click', () => {
     if (adminUsers[username] === password) {
         alert("Login bem-sucedido!");
         document.getElementById('admin-panel').style.display = 'block';
+        renderAdminPosts();
     } else {
         alert("Usuário ou senha incorretos!");
     }
@@ -50,25 +54,70 @@ document.getElementById('create-post-btn').addEventListener('click', () => {
         return;
     }
 
-    const postDiv = document.createElement('div');
-    postDiv.className = 'post';
+    const post = { title, content, image: null };
 
-    let postHTML = `<h2>${title}</h2><p>${content}</p>`;
     if (imageFile) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            postHTML += `<img src="${e.target.result}" style="max-width:100%; border-radius:10px; margin-top:10px;">`;
-            postDiv.innerHTML = postHTML;
+            post.image = e.target.result;
+            posts.push(post);
+            renderPosts();
+            renderAdminPosts();
         }
         reader.readAsDataURL(imageFile);
     } else {
-        postDiv.innerHTML = postHTML;
+        posts.push(post);
+        renderPosts();
+        renderAdminPosts();
     }
 
-    document.getElementById('posts').appendChild(postDiv);
-
-    // Limpar campos
     document.getElementById('post-title').value = '';
     document.getElementById('post-content').value = '';
     document.getElementById('post-image').value = '';
 });
+
+// Renderizar posts na homepage
+function renderPosts() {
+    const postsContainer = document.getElementById('posts');
+    postsContainer.innerHTML = '';
+
+    posts.forEach((post, index) => {
+        const postDiv = document.createElement('div');
+        postDiv.className = 'post';
+        postDiv.innerHTML = `<h2>${post.title}</h2><p>${post.content}</p>`;
+
+        if (post.image) {
+            postDiv.innerHTML += `<img src="${post.image}" style="max-width:100%; border-radius:10px; margin-top:10px;">`;
+        }
+
+        postsContainer.appendChild(postDiv);
+    });
+}
+
+// Renderizar posts no admin panel
+function renderAdminPosts() {
+    const adminPostsContainer = document.getElementById('admin-posts');
+    adminPostsContainer.innerHTML = '';
+
+    posts.forEach((post, index) => {
+        const adminPostDiv = document.createElement('div');
+        adminPostDiv.className = 'post';
+        adminPostDiv.innerHTML = `<h2>${post.title}</h2><p>${post.content}</p>`;
+
+        if (post.image) {
+            adminPostDiv.innerHTML += `<img src="${post.image}" style="max-width:100%; border-radius:10px; margin-top:10px;">`;
+        }
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.innerText = 'Excluir';
+        deleteBtn.onclick = () => {
+            posts.splice(index, 1);
+            renderPosts();
+            renderAdminPosts();
+        };
+
+        adminPostDiv.appendChild(deleteBtn);
+        adminPostsContainer.appendChild(adminPostDiv);
+    });
+}
