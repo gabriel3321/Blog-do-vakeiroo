@@ -1,102 +1,108 @@
-/* Resetando algumas propriedades do navegador */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Estilos gerais */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    padding: 20px;
-    line-height: 1.6;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, #1e2a47, #3e4b80);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
 }
 
 h1 {
-    font-size: 2.5em;
-    color: #28a745;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 3rem;
+    animation: fadeIn 2s ease-out;
 }
 
-h2 {
-    font-size: 1.8em;
-    color: #333;
+/* Animação para os títulos */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Cores e fontes para o painel */
+.panel {
+    display: none;
+    background-color: #333;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.panel.active {
+    display: block;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    width: 200px;
+    color: #fff;
 }
 
 button {
-    background-color: #28a745;
-    color: white;
-    border: none;
     padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
     border-radius: 5px;
-    font-size: 1em;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #45a049;
 }
 
-#login-area {
-    text-align: center;
+/* Área de login no canto superior */
+#login-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.2rem;
 }
 
-#admin-panel, #manutencao {
+#login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Fundo do painel */
+#admin-panel {
     display: none;
-    text-align: center;
     padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
-    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-#manutencao h1 {
-    font-size: 2em;
-    color: #e74c3c;
+#admin-panel.active {
+    display: block;
 }
 
-#ip-info {
-    background-color: #f8f9fa;
-    padding: 10px;
-    margin-top: 20px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+/* Animação de login */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
 }
 
-#blog-area {
-    margin-top: 20px;
-}
-
-#blog-area div {
-    background-color: #fff;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-#blog-area h2 {
-    font-size: 1.5em;
-    color: #333;
-}
-
-#blog-area p {
-    font-size: 1.2em;
-    color: #555;
-}
-
-#blog-area button {
-    background-color: #dc3545;
-    font-size: 1em;
-}
-
-#blog-area button:hover {
-    background-color: #c82333;
+/* Exibição do painel */
+#admin-panel {
+    animation: slideIn 0.5s ease-out;
 }
