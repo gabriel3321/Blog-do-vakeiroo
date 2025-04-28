@@ -1,0 +1,102 @@
+/* Resetando algumas propriedades do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #28a745;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #333;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#login-area {
+    text-align: center;
+}
+
+#admin-panel, #manutencao {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#manutencao h1 {
+    font-size: 2em;
+    color: #e74c3c;
+}
+
+#ip-info {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#blog-area {
+    margin-top: 20px;
+}
+
+#blog-area div {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+#blog-area h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+#blog-area p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+#blog-area button {
+    background-color: #dc3545;
+    font-size: 1em;
+}
+
+#blog-area button:hover {
+    background-color: #c82333;
+}

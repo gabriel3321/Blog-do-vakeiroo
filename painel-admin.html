@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Blog do Vakeiroo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="admin-panel">
+        <h1>Painel de Administração</h1>
+        <button onclick="desativarProtecao()">Desativar Proteção</button>
+        <button onclick="ativarProtecao()">Ativar Proteção</button>
+        <button onclick="verIps()">Ver IPs Acessando</button>
+    </div>
+
+    <script>
+        // Funções para ativar e desativar a proteção
+        function ativarProtecao() {
+            alert("Proteção ativada!");
+            // Lógica de ativar a proteção
+        }
+
+        function desativarProtecao() {
+            let senha = prompt("Digite a senha para desativar a proteção:");
+            if (senha === "?") {
+                alert("Proteção desativada!");
+                // Lógica de desativar a proteção
+            } else {
+                alert("Senha incorreta!");
+            }
+        }
+
+        function verIps() {
+            // Mostrar IPs acessando o site
+            alert("Aqui você verá os IPs acessando.");
+        }
+    </script>
+</body>
+</html>

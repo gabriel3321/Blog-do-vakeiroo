@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog do Vakeiro</title>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.0/dist/email.min.js"></script>
+</head>
+<body>
+    <h1>Blog do Vakeiro</h1>
+
+    <!-- Área de login -->
+    <div id="login-area">
+        <h2>Login Admin</h2>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- Painel Admin -->
+    <div id="admin-panel" style="display:none;">
+        <h2>Painel de Administração</h2>
+        <button onclick="criarPostagem()">Criar Nova Postagem</button>
+        <button onclick="desativarSite()">Desativar Site</button>
+        <button onclick="ativarSite()">Ativar Site</button>
+        <div id="ip-info"></div>
+        <div id="blog-area"></div>
+    </div>
+
+    <!-- Página de Manutenção -->
+    <div id="manutencao" style="display:none;">
+        <h1>Site em Manutenção. Volte em breve!</h1>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Definindo login e senha do admin
+        const adminUsuarios = {
+            "Gabbz": "230112",
+            "Vakeiro": "melhorstreamerdomundo"
+        };
+
+        let siteAtivo = true; // O site começa ativo
+
+        // Função de login
+        function login() {
+            let usuario = prompt("Digite seu nome de usuário:");
+            let senha = prompt("Digite sua senha:");
+
+            if (adminUsuarios[usuario] === senha) {
+                alert("Login bem-sucedido!");
+                document.getElementById('login-area').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+                mostrarInformacoesIP();
+            } else {
+                alert("Usuário ou senha incorretos!");
+            }
+        }
+
+        // Função para ativar o site
+        function ativarSite() {
+            siteAtivo = true;
+            document.getElementById('manutencao').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+        }
+
+        // Função para desativar o site
+        function desativarSite() {
+            siteAtivo = false;
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('manutencao').style.display = 'block';
+        }
+
+        // Função para criar postagens
+        function criarPostagem() {
+            let titulo = prompt("Digite o título da postagem:");
+            let conteudo = prompt("Digite o conteúdo da postagem:");
+            let blogArea = document.getElementById('blog-area');
+            blogArea.innerHTML += `<div><h2>${titulo}</h2><p>${conteudo}</p><button onclick="excluirPostagem(this)">Excluir</button></div>`;
+        }
+
+        // Função para excluir uma postagem
+        function excluirPostagem(button) {
+            button.parentElement.remove();
+        }
+
+        // Função para mostrar IP, cidade e estado
+        function mostrarInformacoesIP() {
+            fetch('https://api.ipgeolocation.io/ipgeo?apiKey=f1c747ab534f49b29d9967da9bb023b7')
+                .then(response => response.json())
+                .then(data => {
+                    let ipInfo = document.getElementById('ip-info');
+                    ipInfo.innerHTML = `<p>IP: ${data.ip}</p><p>Cidade: ${data.city}</p><p>Estado: ${data.state_prov}</p>`;
+                    enviarEmail(data);
+                });
+        }
+
+        // Função para enviar e-mail com informações de IP
+        function enviarEmail(data) {
+            emailjs.send("service_9lds88h", "YOUR_TEMPLATE_ID", {
+                ip: data.ip,
+                cidade: data.city,
+                estado: data.state_prov
+            })
+            .then(response => console.log("E-mail enviado com sucesso!", response))
+            .catch(error => console.log("Erro ao enviar e-mail", error));
+        }
+
+        // Exemplo de página em manutenção
+        if (!siteAtivo) {
+            document.getElementById('manutencao').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
