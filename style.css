@@ -16,12 +16,19 @@ header {
 h1 {
     margin: 0;
     font-size: 2.5em;
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff00ff; }
+    to { text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff; }
 }
 
 #live-status {
     margin-top: 10px;
     font-size: 1.2em;
     color: #00ffea;
+    font-weight: bold;
 }
 
 #login-btn {
@@ -34,6 +41,12 @@ h1 {
     font-size: 1em;
     cursor: pointer;
     box-shadow: 0 0 10px #6200ea;
+    transition: all 0.3s;
+}
+
+#login-btn:hover {
+    background: #9500ff;
+    box-shadow: 0 0 20px #9500ff;
 }
 
 #posts, #admin-posts {
@@ -49,6 +62,11 @@ h1 {
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 15px #9400d3;
+    transition: transform 0.3s;
+}
+
+.post:hover {
+    transform: scale(1.02);
 }
 
 #admin-panel {
@@ -86,4 +104,25 @@ input[type="file"] {
     cursor: pointer;
     color: #fff;
     box-shadow: 0 0 10px #ff00ff;
+    transition: all 0.3s;
+}
+
+#create-post-btn:hover {
+    background: #e100ff;
+    box-shadow: 0 0 20px #e100ff;
+}
+
+.delete-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #ff0033;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.delete-btn:hover {
+    background: #cc0026;
 }
