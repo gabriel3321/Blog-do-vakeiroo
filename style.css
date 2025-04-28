@@ -1,148 +1,89 @@
-/* Reset de estilos */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Corpo do site */
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #1e2a47, #3e4b80);
-    color: white;
+    background-color: #0d0221;
+    color: #f0f0f0;
+    font-family: 'Orbitron', sans-serif;
     margin: 0;
     padding: 0;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    animation: backgroundAnimation 5s infinite alternate;
 }
 
-/* Animação do fundo */
-@keyframes backgroundAnimation {
-    0% {
-        background: linear-gradient(135deg, #1e2a47, #3e4b80);
-    }
-    100% {
-        background: linear-gradient(135deg, #4e6b8c, #3e4b80);
-    }
-}
-
-/* Título */
-h1 {
-    font-size: 3rem;
+header {
+    background: linear-gradient(90deg, #8a00d4, #1e0038);
+    padding: 20px;
     text-align: center;
-    margin-bottom: 50px;
-    animation: fadeIn 2s ease-out;
+    box-shadow: 0 0 20px #8a00d4;
 }
 
-/* Animação de fade-in */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+h1 {
+    margin: 0;
+    font-size: 2.5em;
 }
 
-/* Box de login no canto inferior esquerdo */
-#login-container {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 20px;
+#live-status {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: #00ffea;
+}
+
+#login-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #6200ea;
+    border: none;
+    color: white;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
-    animation: slideIn 0.5s ease-out;
-}
-
-#login-container button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border-radius: 5px;
+    font-size: 1em;
     cursor: pointer;
+    box-shadow: 0 0 10px #6200ea;
 }
 
-#login-container button:hover {
-    background-color: #45a049;
+#posts, #admin-posts {
+    padding: 20px;
+    display: grid;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 20px auto;
 }
 
-/* Formulário de Login */
-#login-form {
-    display: none;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-top: 20px;
+.post {
+    background: #1b0036;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #9400d3;
 }
 
-#login-form input {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #fff;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-    width: 250px;
-    color: #fff;
-}
-
-#login-form button {
-    background-color: #4CAF50;
-    padding: 10px 20px;
-    color: white;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#login-form button:hover {
-    background-color: #45a049;
-}
-
-/* Painel Admin */
 #admin-panel {
-    display: none;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    animation: slideIn 0.5s ease-out;
+    background: #13002b;
+    padding: 30px;
+    border-radius: 20px;
+    margin: 30px auto;
+    max-width: 700px;
+    box-shadow: 0 0 20px #ff00ff;
 }
 
-#admin-panel h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-#admin-panel button {
-    background-color: #4CAF50;
-    padding: 10px 20px;
-    color: white;
-    font-size: 1.2rem;
+input[type="text"], textarea {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    background: #220044;
     border: none;
-    border-radius: 5px;
-    margin-top: 20px;
+    color: white;
+    border-radius: 10px;
+}
+
+input[type="file"] {
+    margin: 10px 0;
+    color: white;
+}
+
+#create-post-btn {
+    width: 100%;
+    padding: 15px;
+    background: #ff00ff;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.2em;
+    margin-top: 10px;
     cursor: pointer;
-}
-
-#admin-panel button:hover {
-    background-color: #45a049;
-}
-
-/* Animação de slide-in */
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(0);
-    }
+    color: #fff;
+    box-shadow: 0 0 10px #ff00ff;
 }
