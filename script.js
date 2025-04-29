@@ -1,123 +1,65 @@
-// Admin Users
-const adminUsers = {
-    "Vakeiroo": "melhorstreamerdomundo",
-    "Gabbz": "230112"
-};
+function login() {
+    const usuarios = JSON.parse(localStorage.getItem('admins')) || { "Vakeiroo": "melhorstreamerdomundo", "Gabbz": "230112" };
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
 
-// Array para armazenar posts
-let posts = [];
-
-// Login
-document.getElementById('login-btn').addEventListener('click', () => {
-    let username = prompt("Digite seu usuário:");
-    let password = prompt("Digite sua senha:");
-
-    if (adminUsers[username] === password) {
-        alert("Login bem-sucedido!");
-        document.getElementById('admin-panel').style.display = 'block';
-        renderAdminPosts();
+    if (usuarios[user] === pass) {
+        if (user === "Gabbz") {
+            window.location.href = "painel-admin.html";
+        } else {
+            window.location.href = "admin.html";
+        }
     } else {
-        alert("Usuário ou senha incorretos!");
+        document.getElementById('error-msg').innerText = "Usuário ou senha incorretos!";
     }
-});
+}
 
-// Checar Live da Twitch
-fetch('https://api.twitch.tv/helix/streams?user_login=vakeiroo', {
-    headers: {
-        'Client-ID': 'SEU_CLIENT_ID_AQUI',
-        'Authorization': 'Bearer SEU_ACCESS_TOKEN_AQUI'
-    }
-})
-.then(response => response.json())
-.then(data => {
-    const liveStatus = document.getElementById('live-status');
-    if (data.data && data.data.length > 0) {
-        liveStatus.innerText = "🔥 AO VIVO!";
-        liveStatus.style.color = '#ff00ff';
-    } else {
-        liveStatus.innerText = "🛌 Offline";
-        liveStatus.style.color = '#999';
-    }
-})
-.catch(error => {
-    console.log('Erro ao verificar status', error);
-});
+// Mostrar sessões do painel
+function mostrarSessao(sessao) {
+    document.querySelectorAll('.content section').forEach(sec => sec.style.display = 'none');
+    document.getElementById(sessao).style.display = 'block';
+}
 
-// Criar Postagem
-document.getElementById('create-post-btn').addEventListener('click', () => {
-    const title = document.getElementById('post-title').value;
-    const content = document.getElementById('post-content').value;
-    const imageFile = document.getElementById('post-image').files[0];
+// Criar Post
+function criarPost() {
+    const titulo = document.getElementById('titulo').value;
+    const conteudo = document.getElementById('conteudo').value;
+    const imagemInput = document.getElementById('imagem').files[0];
 
-    if (!title || !content) {
-        alert("Preencha título e conteúdo!");
+    if (!titulo || !conteudo) {
+        alert('Preencha título e conteúdo!');
         return;
     }
 
-    const post = { title, content, image: null };
-
-    if (imageFile) {
+    if (imagemInput) {
         const reader = new FileReader();
-        reader.onload = function(e) {
-            post.image = e.target.result;
-            posts.push(post);
-            renderPosts();
-            renderAdminPosts();
-        }
-        reader.readAsDataURL(imageFile);
+        reader.onload = () => {
+            criarPostagem(titulo, conteudo, reader.result);
+        };
+        reader.readAsDataURL(imagemInput);
     } else {
-        posts.push(post);
-        renderPosts();
-        renderAdminPosts();
+        criarPostagem(titulo, conteudo);
     }
 
-    document.getElementById('post-title').value = '';
-    document.getElementById('post-content').value = '';
-    document.getElementById('post-image').value = '';
-});
-
-// Renderizar posts na homepage
-function renderPosts() {
-    const postsContainer = document.getElementById('posts');
-    postsContainer.innerHTML = '';
-
-    posts.forEach((post, index) => {
-        const postDiv = document.createElement('div');
-        postDiv.className = 'post';
-        postDiv.innerHTML = `<h2>${post.title}</h2><p>${post.content}</p>`;
-
-        if (post.image) {
-            postDiv.innerHTML += `<img src="${post.image}" style="max-width:100%; border-radius:10px; margin-top:10px;">`;
-        }
-
-        postsContainer.appendChild(postDiv);
-    });
+    document.getElementById('titulo').value = '';
+    document.getElementById('conteudo').value = '';
+    document.getElementById('imagem').value = '';
 }
 
-// Renderizar posts no admin panel
-function renderAdminPosts() {
-    const adminPostsContainer = document.getElementById('admin-posts');
-    adminPostsContainer.innerHTML = '';
+// Logout
+function logout() {
+    window.location.href = "index.html";
+}
 
-    posts.forEach((post, index) => {
-        const adminPostDiv = document.createElement('div');
-        adminPostDiv.className = 'post';
-        adminPostDiv.innerHTML = `<h2>${post.title}</h2><p>${post.content}</p>`;
+// Modo manutenção
+function ativarManutencao() {
+    localStorage.setItem('siteStatus', 'manutencao');
+    alert("Site em manutenção!");
+    window.location.href = "index.html";
+}
 
-        if (post.image) {
-            adminPostDiv.innerHTML += `<img src="${post.image}" style="max-width:100%; border-radius:10px; margin-top:10px;">`;
-        }
-
-        const deleteBtn = document.createElement('button');
-        deleteBtn.className = 'delete-btn';
-        deleteBtn.innerText = 'Excluir';
-        deleteBtn.onclick = () => {
-            posts.splice(index, 1);
-            renderPosts();
-            renderAdminPosts();
-        };
-
-        adminPostDiv.appendChild(deleteBtn);
-        adminPostsContainer.appendChild(adminPostDiv);
-    });
+function desativarManutencao() {
+    localStorage.setItem('siteStatus', 'ativo');
+    alert("Site ativado!");
+    window.location.href = "index.html";
 }
