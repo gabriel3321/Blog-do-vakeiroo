@@ -1,48 +1,42 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Admin - Blog do Vakeiro</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Admin</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Painel</h2>
-        <button onclick="mostrarSessao('criar')">Criar Postagem</button>
-        <button onclick="mostrarSessao('ver')">Ver/Apagar Postagens</button>
-        <button onclick="mostrarSessao('ips')">Ver IPs</button>
-        <button onclick="mostrarSessao('novo-admin')">Criar Novo Admin</button>
-        <button onclick="logout()">Sair</button>
-    </div>
+  <div class="sidebar">
+    <h2>Painel</h2>
+    <button onclick="mostrarSessao('criar')">Criar Postagem</button>
+    <button onclick="mostrarSessao('ver')">Ver/Apagar Postagens</button>
+    <button onclick="mostrarSessao('manutencao')">Modo Manutenção</button>
+    <button onclick="logout()">Sair</button>
+  </div>
 
-    <div class="content">
-        <section id="criar" style="display: none;">
-            <h2>Criar Nova Postagem</h2>
-            <input type="text" id="titulo" placeholder="Título">
-            <textarea id="conteudo" placeholder="Conteúdo"></textarea>
-            <input type="file" id="imagem">
-            <button onclick="criarPost()">Publicar</button>
-        </section>
+  <div class="content">
+    <section id="criar" style="display:none;">
+      <h2>Criar Postagem</h2>
+      <input type="text" id="titulo" placeholder="Título">
+      <textarea id="conteudo" placeholder="Conteúdo"></textarea>
+      <input type="file" id="imagem">
+      <button onclick="criarPost()">Publicar</button>
+    </section>
 
-        <section id="ver" style="display: none;">
-            <h2>Postagens Existentes</h2>
-            <div id="postagens"></div>
-        </section>
+    <section id="ver" style="display:none;">
+      <h2>Postagens</h2>
+      <div id="admin-posts"></div>
+    </section>
 
-        <section id="ips" style="display: none;">
-            <h2>IPs Capturados</h2>
-            <div id="ips-capturados"></div>
-        </section>
+    <section id="manutencao" style="display:none;">
+      <h2>Modo Manutenção</h2>
+      <button onclick="ativarManutencao()">Ativar Modo Manutenção</button>
+      <button onclick="desativarManutencao()">Desativar Modo Manutenção</button>
+    </section>
+  </div>
 
-        <section id="novo-admin" style="display: none;">
-            <h2>Criar Novo Administrador</h2>
-            <input type="text" id="novo-usuario" placeholder="Novo Usuário">
-            <input type="password" id="nova-senha" placeholder="Nova Senha">
-            <button onclick="criarNovoAdmin()">Cadastrar</button>
-        </section>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="auto-storage.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
