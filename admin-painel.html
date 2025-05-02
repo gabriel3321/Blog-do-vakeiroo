@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="neon-box">
+    <h1>Painel do Administrador</h1>
+    <div id="painel" class="hidden">
+      <button class="button" onclick="alternarManutencao()">Ativar/Desativar Manutenção</button>
+      <button class="button" onclick="criarPostagem()">Criar Postagem</button>
+      <button class="button" onclick="apagarPostagem()">Apagar Postagem</button>
+    </div>
+    <div id="login">
+      <input type="text" id="usuario" placeholder="Login" class="button"><br><br>
+      <input type="password" id="senha" placeholder="Senha" class="button"><br><br>
+      <button class="button" onclick="logar()">Entrar</button>
+    </div>
+  </div>
+  <script src="admin-painel.js"></script>
+</body>
+</html>
